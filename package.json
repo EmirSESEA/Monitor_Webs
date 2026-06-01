@@ -1,6 +1,6 @@
 {
   "name": "sesea-monitor-electron",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Sistema de monitoreo de páginas web",
   "main": "src/main.js",
   "scripts": {
