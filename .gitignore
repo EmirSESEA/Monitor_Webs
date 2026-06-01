@@ -1,29 +1,15 @@
-# Dependencies
+# Dependencias
 node_modules/
 
-# Build output
+# Ejecutables y carpetas de build
 dist/
-out/
+build/
 
-# Electron builder cache
-.cache/
+# Secretos y configuraciones locales
+.env
+src/sitios.json
 
-# OS files
+# Logs y temporales
+*.log
 .DS_Store
 Thumbs.db
-
-# Logs
-logs/
-*.log
-npm-debug.log*
-
-# Environment variables
-.env
-.env.local
-
-# IDE
-.vscode/
-.idea/
-
-# Generated icon sizes (only icon.ico, icon.icns, and icon.png are needed)
-build/icons/

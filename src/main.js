@@ -29,6 +29,12 @@ autoUpdater.logger = log;
 autoUpdater.autoDownload = true;
 autoUpdater.autoInstallOnAppQuit = true;
 
+// Obtiene la ruta del archivo de sitios en la carpeta de datos de usuario (App Data)
+// Esto separa los datos personales del usuario del código fuente del programa.
+const getSitesPath = () => {
+  return path.join(app.getPath('userData'), 'sitios.json');
+};
+
 let mainWindow;
 
 /* =========================
@@ -331,7 +337,18 @@ function startBackgroundMonitoring() {
 
   setInterval(async () => {
     try {
-      const filePath = path.join(__dirname, 'sitios.json');
+      const filePath = getSitesPath();
+
+      // Si el archivo no existe en AppData, intentamos copiar el que viene por defecto en la app
+      if (!fs.existsSync(filePath)) {
+        const defaultPath = path.join(__dirname, 'sitios.json');
+        if (fs.existsSync(defaultPath)) {
+          fs.copyFileSync(defaultPath, filePath);
+        } else {
+          fs.writeFileSync(filePath, '[]', 'utf8');
+        }
+      }
+
       if (fs.existsSync(filePath)) {
         const data = fs.readFileSync(filePath, 'utf8');
         const sites = JSON.parse(data);
@@ -404,9 +421,15 @@ ipcMain.handle('get-app-version', () => app.getVersion());
 
 ipcMain.handle('load-sites-file', async () => {
   try {
-    const filePath = path.join(__dirname, 'sitios.json');
+    const filePath = getSitesPath();
     if (!fs.existsSync(filePath)) {
-      fs.writeFileSync(filePath, '[]', 'utf8');
+      // Intentar inicializar con el archivo de ejemplo incluido en la carpeta src
+      const defaultPath = path.join(__dirname, 'sitios.json');
+      if (fs.existsSync(defaultPath)) {
+        fs.copyFileSync(defaultPath, filePath);
+      } else {
+        fs.writeFileSync(filePath, '[]', 'utf8');
+      }
     }
     const data = fs.readFileSync(filePath, 'utf8');
     return JSON.parse(data);
@@ -417,7 +440,7 @@ ipcMain.handle('load-sites-file', async () => {
 
 ipcMain.handle('edit-sites-file', async () => {
   const { shell } = require('electron');
-  const filePath = path.join(__dirname, 'sitios.json');
+  const filePath = getSitesPath();
   shell.openPath(filePath);
 });
 
