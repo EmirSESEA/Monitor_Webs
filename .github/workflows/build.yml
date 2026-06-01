@@ -101,12 +101,47 @@ jobs:
           if-no-files-found: error
 
   # ─────────────────────────────────────────────────────────
+  # Linux build (Ubuntu)
+  # ─────────────────────────────────────────────────────────
+  build-linux:
+    name: Build Linux Installer
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libarchive-tools
+          npm ci
+
+      - name: Build Linux AppImage & DEB
+        run: npm run build:linux
+
+      - name: Upload Linux artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: linux-installers
+          path: |
+            dist/*.AppImage
+            dist/*.deb
+          retention-days: 7
+
+  # ─────────────────────────────────────────────────────────
   # Publicar release único en GitHub
   # ─────────────────────────────────────────────────────────
   publish-release:
     name: Create & Publish GitHub Release
     runs-on: ubuntu-latest
-    needs: [build-windows, build-macos]
+    needs: [build-windows, build-macos, build-linux]
 
     steps:
       - name: Download Windows artifacts
@@ -119,6 +154,12 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: macos-installers
+          path: ./artifacts
+
+      - name: Download Linux artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: linux-installers
           path: ./artifacts
 
       - name: Create Release and Upload Assets

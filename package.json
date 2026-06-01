@@ -1,6 +1,6 @@
 {
   "name": "sesea-monitor-electron",
-  "version": "1.1.1",
+  "version": "1.1.0",
   "description": "Sistema de monitoreo de páginas web",
   "main": "src/main.js",
   "scripts": {
@@ -8,7 +8,9 @@
     "dev": "electron .",
     "build:win": "electron-builder --win --publish never",
     "build:mac": "electron-builder --mac --publish never",
-    "build:all": "electron-builder --win --mac --publish never",
+    "build:linux": "electron-builder --linux --publish never",
+    "build:local": "electron-builder --win --linux --publish never",
+    "build:all": "electron-builder --win --mac --linux --publish never",
     "publish:win": "electron-builder --win --publish always",
     "publish:mac": "electron-builder --mac --publish always",
     "release": "node scripts/release.js"
@@ -89,6 +91,14 @@
       "artifactName": "Monitor-Webs-${version}-${arch}.${ext}",
       "hardenedRuntime": true,
       "gatekeeperAssess": false
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Utility",
+      "artifactName": "Monitor-Webs-${version}.${ext}"
     },
     "dmg": {
       "title": "Monitor Webs ${version} ${arch}",
