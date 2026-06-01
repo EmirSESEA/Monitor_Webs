@@ -21,7 +21,7 @@
     "uptime",
     "status"
   ],
-  "author": "EmirSESEA",
+  "author": "EmirSESEA <dgit.sesea@guanajuato.gob.mx>",
   "license": "MIT",
   "build": {
     "appId": "org.seseaguanajuato.monitor",
