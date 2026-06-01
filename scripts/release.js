@@ -47,6 +47,18 @@ switch (bumpType) {
 
 const newTag = `v${newVersion}`;
 
+// ─── Verificar si el tag ya existe antes de empezar ─────────
+try {
+  const tags = runSilent('git tag').split('\n');
+  if (tags.includes(newTag)) {
+    console.error(`\n❌ Error: El tag "${newTag}" ya existe localmente.`);
+    console.error(`   Si fue un error de un intento previo, bórralo con: git tag -d ${newTag}`);
+    process.exit(1);
+  }
+} catch (e) {
+  // Ignorar si hay errores al listar tags (ej. repositorio nuevo sin tags)
+}
+
 // ─── Verificar estado del repo ──────────────────────────────
 console.log('\n🔍 Verificando estado del repositorio...');
 
