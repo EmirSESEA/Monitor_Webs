@@ -1,36 +1,36 @@
 /* DESIGN SYSTEM & VARIABLES — Paleta SESEA Guanajuato */
 :root {
   /* ── Fondos ── */
-  --bg-primary: #1e1f22;
+  --bg-primary: transparent;
   /* Fondo principal */
 
-  --bg-secondary: #26282c;
+  --bg-secondary: rgba(255, 255, 255, 0.03);
   /* Sidebar / logs */
 
-  --bg-card: rgba(52, 52, 56, 0.58);
+  --bg-card: rgba(255, 255, 255, 0.04);
   /* Tarjetas */
 
-  --bg-card-hover: rgba(68, 68, 74, 0.72);
+  --bg-card-hover: rgba(255, 255, 255, 0.05);
   /* Hover tarjetas */
 
   /* ── Bordes ── */
-  --border-color: rgba(255, 255, 255, 0.07);
+  --border-color: rgba(71, 85, 105, 0.15);
 
-  --border-color-hover: rgba(255, 255, 255, 0.18);
+  --border-color-hover: rgba(71, 85, 105, 0.4);
 
   /* ── Textos ── */
-  --text-main: #f5f5f5;
+  --text-main: #0f172a;
 
-  --text-muted: #b0b3b8;
+  --text-muted: #475569;
 
-  --text-dim: #7b8088;
+  --text-dim: #94a3b8;
 
   /* ── Acentos ── */
-  --accent-primary: #d4d4d8;
-  /* Gris claro elegante */
+  --accent-primary: #475569;
+  /* Slate-600 para coherencia con el fondo */
 
-  --accent-secondary: #a1a1aa;
-  /* Gris medio */
+  --accent-secondary: #64748b;
+  /* Slate-500 */
 
   --accent-glow: rgba(255, 255, 255, 0.12);
 
@@ -166,7 +166,7 @@ body {
 .brand h1 {
   font-size: 1.35rem;
   font-weight: 700;
-  background: linear-gradient(135deg, #ffffff 30%, #9ca3af 100%);
+  background: linear-gradient(135deg, #0f172a 30%, #475569 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.5px;
@@ -496,8 +496,8 @@ body {
 
 .search-box input {
   width: 100%;
-  background-color: rgba(68, 66, 64, 0.02);
-  border: 1px solid var(--border-color);
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(71, 85, 105, 0.2);
   color: var(--text-main);
   padding: 0.65rem 1rem 0.65rem 2.6rem;
   border-radius: 30px;
@@ -951,7 +951,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
-  background-color: rgba(5, 7, 12, 0.4);
+  background-color: rgba(15, 23, 42, 0.9);
 }
 
 .log-empty-msg {

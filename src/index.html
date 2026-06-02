@@ -10,9 +10,28 @@
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="index.css">
+  <style>
+    /* Implementación del fondo Slate Glow (resplandor desde abajo) */
+    .app-background {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-color: #ffffff;
+      background-image: radial-gradient(125% 125% at 50% 90%, #fff 40%, #475569 100%);
+      background-size: 100% 100%;
+      pointer-events: none;
+    }
+
+    /* Aseguramos transparencia en los contenedores base */
+    body,
+    .app-container {
+      background-color: transparent !important;
+    }
+  </style>
 </head>
 
 <body>
+  <div class="app-background"></div>
   <div class="app-container">
 
     <!-- UPDATE BANNER -->
